@@ -1,0 +1,21 @@
+@(userFormDef: Form[CreateUserForm])(implicit request: MessagesRequestHeader)
+
+@import helper._
+
+@request.flash.get("success").map { key =>
+@request.messages(key)
+}
+
+@main("Welcome to Play") {
+  @form(routes.UserController.addUser()) {
+		@inputText(userFormDef("name"))
+		@inputText(userFormDef("phone"))
+		@inputText(userFormDef("email"))
+		@inputText(userFormDef("age"))
+		@CSRF.formField
+
+		<div class="buttons">
+			<input type="submit" value="Add User"/>
+		</div>
+	}
+}
