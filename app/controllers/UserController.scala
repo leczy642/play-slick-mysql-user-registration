@@ -21,10 +21,11 @@ class UserController @Inject()(repo: UserData,
     */
   val userForm: Form[CreateUserForm] = Form {
     mapping(
-      "name" -> text,
+      "name" -> nonEmptyText,
       "phone" ->number,
-      "email" -> text,
-      "age" -> number
+      "email" -> email,
+      "age" -> number.verifying(min(0), max(200))
+
     )(CreateUserForm.apply)(CreateUserForm.unapply)
   }
 
